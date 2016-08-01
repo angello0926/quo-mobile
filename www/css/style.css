@@ -1,0 +1,55 @@
+/* Empty. Add your own CSS if you like */
+.logo{
+  width:100%;
+}
+
+.index{
+  margin-top: 40%;
+}
+
+.border-line{
+  border-top: 10px solid black;
+  border-bottom: 5px solid black;
+  text-align: center;
+  padding: 2px;
+}
+
+h1{
+  font-family: "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: bolder;
+  letter-spacing: 6px;
+  text-align: center;
+  font-size: 30px;
+
+}
+
+.margin-top{
+   margin-top: 40%;
+}
+
+.item{
+  margin: 10px;
+  border: 3px solid black;
+}
+
+.login-form{
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  margin-top:0px;
+
+}
+
+.loginPage{
+  margin-top: 25%;
+}
+
+.padding{
+  padding:15px;
+}
+
+.authbuttons{
+  background-color: #A5D3D9;
+  color: black;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
