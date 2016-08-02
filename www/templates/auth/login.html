@@ -11,11 +11,12 @@
         <div class="col col-75 ">
           <div class="list list-inset border-line login-form">
               <label class="item item-input">
-                <input type="text" placeholder="email">
+                <input type="text" placeholder="email" ng-model="user.email">
               </label>
               <label class="item item-input">
-                <input type="text" placeholder="password">
+                <input type="text" placeholder="password" ng-model="user.password">
               </label>
+              <button class="button button-block authbuttons" ng-click="login()">LOG IN</button>
           </div>
         </div>
         <div class="col"></div>
@@ -24,7 +25,7 @@
         <div class="col"></div>
         <div class="col col-75 padding ">
             <h1>OR</h1>
-            <button id="fbLogin" class="button button-block authbuttons">FACEBOOK LOGIN</button>
+            <button id="fbLogin" class="button button-block authbuttons" >FACEBOOK LOGIN</button>
             <button id="twitterLogin" class="button button-block authbuttons">TWITTER LOGIN</button>
         </div>
         <div class="col"></div>

@@ -53,3 +53,8 @@ h1{
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
 }
+
+.tabs-striped.tabs-stable .tab-item.tab-item-active, .tabs-striped.tabs-stable .tab-item.active, .tabs-striped.tabs-stable .tab-item.activated{
+  border-color: #A5D3D9;
+
+}

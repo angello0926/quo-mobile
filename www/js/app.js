@@ -42,15 +42,87 @@ app.config(function($stateProvider, $urlRouterProvider){
     })
     .state('app.auth.login', {
       url: '/login',
-      templateUrl: 'templates/auth/login.html'
+      templateUrl: 'templates/auth/login.html',
+      controller: 'loginController'
     })
     .state('app.auth.signup', {
       url: '/signup',
-      templateUrl: 'templates/auth/signup.html'
+      templateUrl: 'templates/auth/signup.html',
+      controller: 'signupController'
     })
     .state('app.auth.get-started', {
       url: '/get-started',
       templateUrl: 'templates/auth/get-started.html'
     })
+    .state('app.member', {
+      url: '/member',
+      abstract: true,
+      templateUrl: 'templates/member/member.html',
+
+    })
+    .state('app.member.explore', {
+      url: '/explore',
+      templateUrl: 'templates/member/explore.html',
+      controller: 'exploreController'
+    })
+    .state('app.member.home', {
+      url: '/home',
+      templateUrl: 'templates/member/home.html'
+
+    })
+    .state('app.member.editor', {
+      url: '/editor',
+      templateUrl: 'templates/member/editor.html'
+    })
+    .state('app.member.subs', {
+      url: '/subs',
+      templateUrl: 'templates/member/subs.html'
+    })
+    .state('app.member.profile', {
+      url: '/profile',
+      templateUrl: 'templates/member/profile.html'
+    })
+    .state('app.editor', {
+      url: '/editor',
+      abstract:true,
+      templateUrl: 'templates/editor/editor.html'
+    })
+    .state('app.editor.text', {
+      url: '/text',
+      templateUrl: 'templates/editor/text.html'
+    })
+     .state('app.editor.color', {
+      url: '/color',
+      templateUrl: 'templates/editor/color.html'
+    })
+    .state('app.editor.shapes', {
+      url: '/shapes',
+      templateUrl: 'templates/editor/shapes.html'
+    })
+    .state('app.editor.photos', {
+      url: '/photos',
+      templateUrl: 'templates/editor/photos.html'
+    })
+
+
   $urlRouterProvider.otherwise('/app/landing');
 });
+
+// prevent users access other pages without login
+app.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+  $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
+    if (!AuthService.isAuthenticated()) {
+       if (next.name !== 'app.landing' && next.name !== 'app.auth.login' && next.name !== 'app.auth.signup'&& next.name !== 'app.auth.get-started') {
+        event.preventDefault();
+        $state.go('app.landing');
+
+      }
+    }
+  });
+});
+
+app.config(['$ionicConfigProvider', function($ionicConfigProvider) {
+
+    $ionicConfigProvider.tabs.position('bottom'); // other values: top
+
+}]);
