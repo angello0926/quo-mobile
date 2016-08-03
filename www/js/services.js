@@ -66,9 +66,10 @@ angular.module('quo')
     login: login,
     register: register,
     logout: logout,
-    isAuthenticated: function() {return isAuthenticated;},
+    isAuthenticated: function() {return isAuthenticated;}
   };
 })
+
 
 .factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
   return {

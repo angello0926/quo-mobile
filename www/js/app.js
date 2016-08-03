@@ -85,23 +85,40 @@ app.config(function($stateProvider, $urlRouterProvider){
     .state('app.editor', {
       url: '/editor',
       abstract:true,
-      templateUrl: 'templates/editor/editor.html'
+      templateUrl: 'templates/editor/editor.html',
+      controller: "editorController"
     })
     .state('app.editor.text', {
       url: '/text',
-      templateUrl: 'templates/editor/text.html'
+      views: {
+        "text": {
+          templateUrl: 'templates/editor/text.html',
+        }
+      }
     })
      .state('app.editor.color', {
       url: '/color',
-      templateUrl: 'templates/editor/color.html'
+      views: {
+        "color": {
+          templateUrl: 'templates/editor/color.html',
+        }
+      }
     })
     .state('app.editor.shapes', {
       url: '/shapes',
-      templateUrl: 'templates/editor/shapes.html'
+      views: {
+        "shapes": {
+          templateUrl: 'templates/editor/shapes.html',
+        }
+      }
     })
     .state('app.editor.photos', {
       url: '/photos',
-      templateUrl: 'templates/editor/photos.html'
+      views: {
+        "photos": {
+          templateUrl: 'templates/editor/photos.html',
+        }
+      }
     })
 
 

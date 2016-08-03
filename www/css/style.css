@@ -58,3 +58,59 @@ h1{
   border-color: #A5D3D9;
 
 }
+
+#container{
+  border: 1px solid whitesmoke;
+
+  width: 100%;
+}
+
+#container:before{
+  display: block;
+  padding-top: 75%;
+}
+
+.save{
+   float: right;
+}
+
+.fontselect{
+  border: 2px solid #A5D3D9;
+  font-size: 12px;
+  padding: 0px 5px 0px 5px;
+}
+
+.textinput{
+  border: none;
+/*  border-bottom: 1px solid black;
+  position: relative;
+  height: 100px;
+  margin-top: 5px;
+  font-size: 12px;*/
+  margin: 0px;
+
+}
+
+
+
+textarea{
+  margin:3px;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid black;
+
+}
+
+.labelfont,.item-select select{
+  font-size: 12px;
+}
+
+.ion-plus-circled{
+  font-size: 40px;
+}
+
+.color{
+  font-size:40px;
+  text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
+}
+
