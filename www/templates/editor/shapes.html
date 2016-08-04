@@ -1,0 +1,27 @@
+<ion-view view-title="Add Shapes" hide-nav-bar="true">
+  <ion-content>
+  <label class="border">Fill color</label>
+   <div class="row" >
+    <div class="col"></div>
+    <div class="col color " ng-class="class" ng-repeat="color in colorsBgDefault" style="color: {{color}};" ng-click="fillColorChosen($index)"><i id="{{'fillColor'+$index}}" class="normalfill ion-record row1"></i></div>
+    <div class="col"><i class="ion-plus-circled"></i></div>
+    <div class="col"></div>
+  </div>
+  <label class="border">Border color</label>
+   <div class="row" >
+    <div class="col"></div>
+    <div class="col color " ng-class="class" ng-repeat="color in colorsBgDefault" style="color: {{color}};" ng-click="borderColorChosen($index)"><i id="{{'borderColor'+$index}}" class="normalborder ion-record row1"></i></div>
+    <div class="col"><i class="ion-plus-circled"></i></div>
+    <div class="col"></div>
+  </div>
+  <label class="border">Choose Shape</label>
+  <div class="row" >
+    <div class="col"></div>
+    <div class="col"><img ng-click="generateCircle()" class="shapes" src="img/circle.svg"></div>
+    <div class="col"><img ng-click="generateTriangle()" class="shapes" src="img/up-arrow.svg"></div>
+    <div class="col"><img ng-click="generateSquare()" class="shapes" src="img/square.svg"></div>
+    <div class="col"></div>
+  </div>
+  </ion-content>
+  <ion-tabs></ion-tabs>
+</ion-view>

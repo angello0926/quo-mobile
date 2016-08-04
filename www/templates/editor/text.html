@@ -1,38 +1,38 @@
-<ion-view view-title="text" hide-nav-bar="true">
-  <ion-content scroll=true class="textbackground">
-  <div class="row">
-    <div class="col"></div>
-    <div class="col-75">
-      <div class="list">
-        <label class="item item-input item-select fontselect">
-          <div class="input-label labelfont ">
-            Fonts
-          </div>
-          <select class="labelfont" ng-model="textParams.fontSelected" ng-options="font for font in fonts"></select>
-        </label>
+<ion-view view-title="text" hide-nav-bar="true" ng-style="tabStyle">
+  <ion-content>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-75">
+        <div class="list">
+          <label class="item item-input item-select fontselect">
+            <div class="input-label labelfont ">
+              Fonts
+            </div>
+            <select class="labelfont" ng-model="textParams.fontSelected" ng-options="font for font in fonts"></select>
+          </label>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col textinput">
+        <ion-item class="textinput" >
+          <textarea ng-model="textParams.textContent" placeholder="Type your text here...."></textarea>
+        </ion-item>
       </div>
     </div>
-    <div class="col"></div>
-  </div>
-   <div class="row">
-     <div class="col textinput">
-      <ion-item class="textinput" >
-        <textarea ng-model="textParams.textContent" placeholder="Type your text here...."></textarea>
-      </ion-item>
-     </div>
-   </div>
-   <div class="row">
-    <div class="col"></div>
-    <div class="col color" ng-class="class" ng-repeat="color in colorsDefault" style="color: {{color}};" ng-click="colorChosen($index)"><i id="{{$index}}" class="normal ion-record"></i></div>
-    <div class="col"><i class="ion-plus-circled"></i></div>
-    <div class="col"></div>
-  </div>
-  <div class="row">
-  <div class="col"></div>
-  <div class="col-75">
-  <button class="button button-block authbuttons" ng-click="sendTexttoCanvas()">send text to canvas </button>
-  </div>
-  <div class="col"></div>
-  </div>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col color" ng-class="class" ng-repeat="color in colorsDefault" style="color: {{color}};" ng-click="colorChosen($index)"><i id="{{$index}}" class="normal ion-record"></i></div>
+      <div class="col"><i class="ion-plus-circled"></i></div>
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-50">
+        <button class="button button-block authbuttons" ng-click="sendTexttoCanvas()">send text to canvas </button>
+      </div>
+      <div class="col"></div>
+    </div>
   </ion-content>
 </ion-view>

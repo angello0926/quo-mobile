@@ -114,3 +114,25 @@ textarea{
   text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
 }
 
+.ion-social-facebook{
+  font-size: 18px;
+}
+
+img{
+  width:100%;
+}
+
+label{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.border{
+  border-bottom:3px solid #A5D3D9;
+  padding:3px;
+  margin-left: 5px;
+}
+
+.shapes{
+  margin-top: 10px;
+  width:80%;
+}

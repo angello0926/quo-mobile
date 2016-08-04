@@ -1,19 +1,15 @@
-<ion-view view-title="backgroundcolor" hide-nav-bar="true">
-  <ion-content scroll=true >
+<ion-view view-title="Add Shapes" hide-nav-bar="true">
+  <ion-content>
+    <div class="row" >
+      <div class="col"></div>
+      <div class="col color " ng-class="class" ng-repeat="color in colorsBgDefault" style="color: {{color}};" ng-click="BgColorChosen($index)"><i id="{{'color'+$index}}" class="normalbg ion-record row1"></i></div>
+      <div class="col"></div>
+    </div>
 
-   <div class="row" >
-    <div class="col"></div>
-    <div class="col color " ng-class="class" ng-repeat="color in colorsBgDefault" style="color: {{color}};" ng-click="BgColorChosen($index)"><i id="{{$index}}" class="normalbg ion-record row1"></i></div>
-    <div class="col"></div>
-  </div>
-
-  <div class="row">
-    <div class="col"></div>
-    <div class="col-10"><i class="ion-plus-circled"></i></div>
-    <div class="col"></div>
-  </div>
-
-
-
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-10"><i class="ion-plus-circled"></i></div>
+      <div class="col"></div>
+    </div>
   </ion-content>
 </ion-view>
