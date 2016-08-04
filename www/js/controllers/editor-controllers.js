@@ -52,6 +52,7 @@ angular.module('quo')
     $scope.layer.add(bg);
     $scope.stage.add($scope.layer);
   }
+
   $scope.initiateStage();
 
   $scope.saveImage = function(){
@@ -59,6 +60,11 @@ angular.module('quo')
     window.open(dataURL);
   }
 
+/**
+  *                *
+  * TEXT GENERATOR *
+  *                *
+*/
   $scope.colorChosen= function(index){
     $('.normal').removeClass('').addClass('ion-record normal');
     $scope.textParams.colorSelected= $scope.colorsDefault[index];
@@ -85,10 +91,10 @@ angular.module('quo')
     });
     textGroup.add(complexText);
     layer.add(textGroup);
-    $scope.addAnchor(textGroup, 0, 0, 'topLeft');
-    $scope.addAnchor(textGroup, complexText.getWidth(), 0, 'topRight');
-    $scope.addAnchor(textGroup, complexText.getWidth(), complexText.getHeight(), 'bottomRight');
-    $scope.addAnchor(textGroup, 0, complexText.getHeight(), 'bottomLeft');
+    $scope.addTextAnchor(textGroup, 0, 0, 'topLeft');
+    $scope.addTextAnchor(textGroup, complexText.getWidth(), 0, 'topRight');
+    $scope.addTextAnchor(textGroup, complexText.getWidth(), complexText.getHeight(), 'bottomRight');
+    $scope.addTextAnchor(textGroup, 0, complexText.getHeight(), 'bottomLeft');
     textGroup.on('touchstart', function() {
       textGroup.find('.topLeft').show();
       textGroup.find('.topRight').show();
@@ -160,7 +166,7 @@ angular.module('quo')
     }
   }
 
-  $scope.addAnchor=function(group,x,y,name){
+  $scope.addTextAnchor=function(group,x,y,name){
     var stage = group.getStage();
     var layer = group.getLayer();
     var anchor = new Konva.Circle({
@@ -201,7 +207,11 @@ angular.module('quo')
 
     group.add(anchor);
   }
-
+/**
+  *                            *
+  * BACKGROUND COLOR GENERATOR *
+  *                            *
+*/
   $scope.BgColorChosen= function(index){
     $('.normalbg').removeClass('').addClass('ion-record normal');
     $scope.colorParams.bgColor= $scope.colorsBgDefault[index];
@@ -212,6 +222,12 @@ angular.module('quo')
     $scope.layer.draw();
   }
 
+/**
+  *                            *
+  * SHAPE -CIRCLE GENERATOR *
+  *                            *
+*/
+
   $scope.fillColorChosen=function(index){
     $('.normalfill').removeClass('').addClass('ion-record normal');
     $scope.colorParams.fillColor= $scope.colorsBgDefault[index];
@@ -220,12 +236,359 @@ angular.module('quo')
 
   }
 
-   $scope.borderColorChosen=function(index){
+  $scope.borderColorChosen=function(index){
     $('.normalborder').removeClass('').addClass('ion-record normal');
     $scope.colorParams.borderColor= $scope.colorsBgDefault[index];
     console.log($scope.colorParams.fillColor);
     $('#'+'borderColor'+index).removeClass('ion-record').addClass('ion-checkmark-circled');
 
   }
+
+  $scope.generateCircle=function(){
+    console.log('circle');
+    var layer=new Konva.Layer();
+    var circle = new Konva.Circle({
+      radius: 100,
+      fill: $scope.colorParams.fillColor,
+      stroke: $scope.colorParams.borderColor,
+      strokeWidth: 4
+    });
+
+    var circleGroup=new Konva.Group({
+        x:10,
+        y:200,
+        draggable:true
+    });
+    $scope.stage.add(layer);
+    layer.add(circleGroup);
+    circleGroup.add(circle);
+    $scope.addCircleAnchor(circleGroup, 0,0 , 'origin');
+    $scope.addCircleAnchor(circleGroup, 0, 100, 'control');
+    circleGroup.on('touchstart', function() {
+      circleGroup.find('.origin').show();
+      circleGroup.find('.control').show();
+      layer.draw();
+    })
+    circleGroup.on('tap', function() {
+      circleGroup.find('.origin').hide();
+      circleGroup.find('.control').hide();
+      layer.draw();
+    })
+    circleGroup.on('dbltap', function() {
+      this.destroy();
+      layer.draw();
+    })
+    circleGroup.on('dragstart', function() {
+      this.moveToTop();
+      layer.draw();
+    })
+    layer.draw();
+  }
+
+  $scope.addCircleAnchor=function(group, x, y, name){
+    var stage = group.getStage();
+    var layer = group.getLayer();
+
+    var anchor = new Konva.Circle({
+        x: x,
+        y: y,
+        stroke: '#666',
+        fill: '#ddd',
+        strokeWidth: 2,
+        radius: 8,
+        name: name,
+        draggable: true,
+        dragOnTop: false
+    });
+
+    anchor.on('dragmove', function() {
+        $scope.updateCircle(this);
+        layer.draw();
+    });
+    anchor.on('mousedown touchstart', function() {
+        group.setDraggable(false);
+        this.moveToTop();
+    });
+    anchor.on('dragend', function() {
+        group.setDraggable(true);
+        layer.draw();
+    });
+    // add hover styling
+    anchor.on('mouseover', function() {
+        var layer = this.getLayer();
+        document.body.style.cursor = 'pointer';
+        this.setStrokeWidth(4);
+        layer.draw();
+    });
+    anchor.on('mouseout', function() {
+        var layer = this.getLayer();
+        document.body.style.cursor = 'default';
+        this.setStrokeWidth(2);
+        layer.draw();
+    });
+
+    group.add(anchor);
+    var origin = group.get('.origin')[0];
+    origin.draggable(false);
+  }
+
+  $scope.updateCircle=function(activeAnchor){
+    var group = activeAnchor.getParent();
+    var control=group.get('.control')[0];
+    var origin = group.get('.origin')[0];
+    var circle = group.get('Circle')[0];
+    var anchorX = activeAnchor.getX();
+    var anchorY = activeAnchor.getY();
+    // update anchor positions
+    origin.setX(anchorX);
+    circle.position(origin.position());
+    var radius = Math.abs(origin.getY() - control.getY());
+    circle.radius(radius);
+  }
+
+/**
+  *                            *
+  * SHAPE -TRANGLE GENERATOR *
+  *                            *
+*/
+  $scope.generateTriangle=function(){
+    var tri = new Konva.RegularPolygon({
+        sides: 3,
+        radius: 70,
+        fill: $scope.colorParams.fillColor,
+        stroke: $scope.colorParams.borderColor,
+        strokeWidth: 3
+      });
+
+      var triGroup=new Konva.Group({
+          x:40,
+          y:200,
+          draggable:true
+      });
+      var layer = new Konva.Layer();
+      $scope.stage.add(layer);
+      layer.add(triGroup);
+      triGroup.add(tri);
+      $scope.addTriAnchor(triGroup, 0, 0, 'origin');
+      $scope.addTriAnchor(triGroup, 0, 35, 'control');
+      triGroup.on('touchstart', function() {
+        triGroup.find('.origin').show();
+        triGroup.find('.control').show();
+        layer.draw();
+      })
+      triGroup.on('tap', function() {
+        triGroup.find('.origin').hide();
+        triGroup.find('.control').hide();
+        layer.draw();
+      })
+      triGroup.on('dbltap', function() {
+        this.destroy();
+        layer.draw();
+      })
+      triGroup.on('dragstart', function() {
+        this.moveToTop();
+        layer.draw();
+      })
+    layer.draw();
+  }
+
+  $scope.addTriAnchor=function(group, x, y, name){
+    var stage = group.getStage();
+    var layer = group.getLayer();
+    var anchor = new Konva.Circle({
+        x: x,
+        y: y,
+        stroke: '#666',
+        fill: '#ddd',
+        strokeWidth: 2,
+        radius: 8,
+        name: name,
+        draggable: true,
+        dragOnTop: false
+    });
+
+    anchor.on('dragmove', function() {
+        $scope.updatetri(this);
+        layer.draw();
+    });
+    anchor.on('mousedown touchstart', function() {
+        group.setDraggable(false);
+        this.moveToTop();
+    });
+    anchor.on('dragend', function() {
+        group.setDraggable(true);
+        layer.draw();
+    });
+    // add hover styling
+    anchor.on('mouseover', function() {
+        var layer = this.getLayer();
+        document.body.style.cursor = 'pointer';
+        this.setStrokeWidth(4);
+        layer.draw();
+    });
+    anchor.on('mouseout', function() {
+        var layer = this.getLayer();
+        document.body.style.cursor = 'default';
+        this.setStrokeWidth(2);
+        layer.draw();
+    });
+    group.add(anchor);
+    var origin = group.get('.origin')[0];
+    origin.draggable(false);
+  }
+
+  $scope.updatetri=function(activeAnchor){
+    var group = activeAnchor.getParent();
+    var control=group.get('.control')[0];
+    var origin = group.get('.origin')[0];
+    var tri = group.get('RegularPolygon')[0];
+    var anchorX = activeAnchor.getX();
+    var anchorY = activeAnchor.getY();
+    // update anchor positions
+    origin.setX(anchorX);
+    tri.position(origin.position());
+    var radius = Math.abs(origin.getY() - control.getY());
+    tri.radius(radius*2);
+  }
+
+/**
+  *                            *
+  * SHAPE -RECTANGLE GENERATOR *
+  *                            *
+*/
+  $scope.generateSquare=function(){
+    var layer = new Konva.Layer();
+    var rect = new Konva.Rect({
+      width: 100,
+      height: 100,
+      fill: $scope.colorParams.fillColor,
+      stroke: $scope.colorParams.borderColor,
+      strokeWidth: 4
+    });
+
+    var rectGroup=new Konva.Group({
+        x:40,
+        y:200,
+        draggable:true
+    });
+
+    $scope.stage.add(layer);
+    layer.add(rectGroup);
+    rectGroup.add(rect);
+    $scope.addSquareAnchor(rectGroup, 0, 0, 'topLeft');
+    $scope.addSquareAnchor(rectGroup, 100, 0, 'topRight');
+    $scope.addSquareAnchor(rectGroup, 100, 100, 'bottomRight');
+    $scope.addSquareAnchor(rectGroup, 0, 100, 'bottomLeft');
+
+    rectGroup.on('touchstart', function() {
+      rectGroup.find('.topLeft').show();
+      rectGroup.find('.topRight').show();
+      rectGroup.find('.bottomRight').show();
+      rectGroup.find('.bottomLeft').show();
+      layer.draw();
+    })
+    rectGroup.on('tap', function() {
+      rectGroup.find('.topLeft').hide();
+      rectGroup.find('.topRight').hide();
+      rectGroup.find('.bottomRight').hide();
+      rectGroup.find('.bottomLeft').hide();
+      layer.draw();
+    })
+
+    rectGroup.on('dbltap', function() {
+      this.destroy();
+      layer.draw();
+    })
+    rectGroup.on('dragstart', function() {
+      this.moveToTop();
+      layer.draw();
+    })
+    layer.draw();
+  }
+
+  $scope.addSquareAnchor=function(group, x, y, name){
+    var stage = group.getStage();
+    var layer = group.getLayer();
+    var anchor = new Konva.Circle({
+      x: x,
+      y: y,
+      stroke: '#666',
+      fill: '#ddd',
+      strokeWidth: 2,
+      radius: 8,
+      name: name,
+      draggable: true,
+      dragOnTop: false
+    });
+
+    anchor.on('dragmove', function() {
+        $scope.updateSquare(this);
+        layer.draw();
+    });
+    anchor.on('mousedown touchstart', function() {
+        group.setDraggable(false);
+        this.moveToTop();
+    });
+    anchor.on('dragend', function() {
+        group.setDraggable(true);
+        layer.draw();
+    });
+    // add hover styling
+    anchor.on('mouseover', function() {
+        var layer = this.getLayer();
+        document.body.style.cursor = 'pointer';
+        this.setStrokeWidth(4);
+        layer.draw();
+    });
+    anchor.on('mouseout', function() {
+        var layer = this.getLayer();
+        document.body.style.cursor = 'default';
+        this.setStrokeWidth(2);
+        layer.draw();
+    });
+    group.add(anchor);
+  }
+
+  $scope.updateSquare=function(activeAnchor){
+    var group = activeAnchor.getParent();
+
+    var topLeft = group.get('.topLeft')[0];
+    var topRight = group.get('.topRight')[0];
+    var bottomRight = group.get('.bottomRight')[0];
+    var bottomLeft = group.get('.bottomLeft')[0];
+    var rect = group.get('Rect')[0];
+
+    var anchorX = activeAnchor.getX();
+    var anchorY = activeAnchor.getY();
+
+    // update anchor positions
+    switch (activeAnchor.getName()) {
+        case 'topLeft':
+            topRight.setY(anchorY);
+            bottomLeft.setX(anchorX);
+            break;
+        case 'topRight':
+            topLeft.setY(anchorY);
+            bottomRight.setX(anchorX);
+            break;
+        case 'bottomRight':
+            bottomLeft.setY(anchorY);
+            topRight.setX(anchorX);
+            break;
+        case 'bottomLeft':
+            bottomRight.setY(anchorY);
+            topLeft.setX(anchorX);
+            break;
+    }
+
+    rect.position(topLeft.position());
+    var width = topRight.getX() - topLeft.getX();
+    var height = bottomLeft.getY() - topLeft.getY();
+    if(width && height) {
+        rect.width(width);
+        rect.height(height);
+    }
+  }
+
 })
 
