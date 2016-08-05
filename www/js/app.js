@@ -4,10 +4,11 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-var app = angular.module('quo', ['ionic']);
+var app = angular.module('quo', ['ionic','ngCordova']);
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
+
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -26,6 +27,10 @@ app.run(function($ionicPlatform) {
 
 app.config(function($stateProvider, $urlRouterProvider){
   $stateProvider
+    .state('index',{
+      url:'/index',
+      templateUrl: 'index.html'
+    })
     .state('app', {
       url: '/app',
       abstract: true,
@@ -70,10 +75,6 @@ app.config(function($stateProvider, $urlRouterProvider){
       templateUrl: 'templates/member/home.html'
 
     })
-    .state('app.member.editor', {
-      url: '/editor',
-      templateUrl: 'templates/member/editor.html'
-    })
     .state('app.member.subs', {
       url: '/subs',
       templateUrl: 'templates/member/subs.html'
@@ -82,13 +83,13 @@ app.config(function($stateProvider, $urlRouterProvider){
       url: '/profile',
       templateUrl: 'templates/member/profile.html'
     })
-    .state('app.editor', {
+    .state('editor', {
       url: '/editor',
       abstract:true,
       templateUrl: 'templates/editor/editor.html',
       controller: "editorController"
     })
-    .state('app.editor.text', {
+    .state('editor.text', {
       url: '/text',
       views: {
         "text": {
@@ -96,7 +97,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         }
       }
     })
-     .state('app.editor.color', {
+     .state('editor.color', {
       url: '/color',
       views: {
         "color": {
@@ -104,7 +105,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         }
       }
     })
-    .state('app.editor.shapes', {
+    .state('editor.shapes', {
       url: '/shapes',
       views: {
         "shapes": {
@@ -112,7 +113,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         }
       }
     })
-    .state('app.editor.photos', {
+    .state('editor.photos', {
       url: '/photos',
       views: {
         "photos": {
@@ -125,14 +126,14 @@ app.config(function($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/app/landing');
 });
 
-// prevent users access other pages without login
+//prevent users access other pages without login
 app.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
   $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
     if (!AuthService.isAuthenticated()) {
        if (next.name !== 'app.landing' && next.name !== 'app.auth.login' && next.name !== 'app.auth.signup'&& next.name !== 'app.auth.get-started') {
         event.preventDefault();
-        $state.go('app.landing');
 
+        $state.go('app.landing');
       }
     }
   });

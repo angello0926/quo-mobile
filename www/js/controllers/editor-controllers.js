@@ -1,8 +1,12 @@
 angular.module('quo')
 
-.controller('editorController', function($scope,$state,$ionicActionSheet) {
+.controller('editorController', function($scope,$state,$ionicActionSheet, $cordovaDevice, $cordovaFile, $ionicPlatform, $cordovaEmailComposer, $ionicActionSheet, ImageService, FileService, $cordovaImagePicker) {
 
-  console.log($scope)
+  $ionicPlatform.ready(function() {
+    $scope.images = FileService.images();
+
+  });
+
   $scope.fonts=["Merriweather", "Inconsolata", "Abel", "Quicksand", "Playfair Display", "Roboto Condensed"];
   $scope.colorsDefault=['black','white','#607d8b','#555555','#ffc93b'];
   $scope.colorsBgDefault=['#e74c3c','#e67e22','#f1c40f','#1abc9c','#34495e','#ecf0f1'];
@@ -15,28 +19,26 @@ angular.module('quo')
   $scope.shapesParams = {};
   $scope.photoParams  = {};
 
+  var windowHeight = $(document).height();
+  var navbarHeight = $('.editor-navbar').height();
+  $scope.canvasWidth  = screen.width - 2;
+  $scope.canvasHeight = $scope.canvasWidth * 0.75;
+  $scope.editorHeight = windowHeight - navbarHeight - $scope.canvasHeight;
+
+  $('.dynamic-editor-height').css("height", $scope.editorHeight);
   $scope.initiateStage=function(){
-    var windowHeight = $(document).height();
-    var navbarHeight = $('.editor-navbar').outerHeight();
-    var canvasWidth  = screen.width - 2;
-    var canvasHeight = canvasWidth * 0.75;
-
-    $scope.tabStyle = {
-      height: windowHeight - navbarHeight - canvasHeight
-    }
-
-    console.log($scope.tabStyle)
     $scope.canvasStyle = {
-      width: canvasWidth,
-      height: canvasHeight
+      width: $scope.canvasWidth,
+      height: $scope.canvasHeight
     }
 
     $scope.stage = new Konva.Stage({
       container: 'canvas',
       name: "canvas",
-      width: canvasWidth,
-      height: canvasHeight
+      width: $scope.canvasWidth,
+      height: $scope.canvasHeight
     })
+
 
     $scope.layer = new Konva.Layer();
 
@@ -44,20 +46,43 @@ angular.module('quo')
       x: 0,
       y: 0,
       fill: '#F0F0F0',
-      width: canvasWidth,
-      height: canvasHeight,
+      width: $scope.canvasWidth,
+      height: $scope.canvasHeight,
       id:"bg"
     });
 
     $scope.layer.add(bg);
     $scope.stage.add($scope.layer);
-  }
 
-  $scope.initiateStage();
+
+  }
+    $scope.initiateStage();
+
+  $scope.resizeView=function(){
+    angular.element(document).ready(function () {
+    $('.dynamic-editor-height').css("height", $scope.editorHeight);
+      });
+    console.log( $scope.editorHeight);
+  }
 
   $scope.saveImage = function(){
     var dataURL = $scope.stage.toDataURL();
-    window.open(dataURL);
+     cordova.base64ToGallery(
+        dataURL,
+
+        {
+            prefix: 'img_',
+            mediaScanner: true
+        },
+
+        function(path) {
+            console.log(path);
+        },
+
+        function(err) {
+            console.error(err);
+        }
+    );
   }
 
 /**
@@ -588,6 +613,62 @@ angular.module('quo')
         rect.width(width);
         rect.height(height);
     }
+  }
+
+
+
+
+  $scope.addMedia = function() {
+    $scope.hideSheet = $ionicActionSheet.show({
+      buttons: [
+        { text: 'Take photo' },
+        { text: 'Photo from library' }
+      ],
+      titleText: 'Add images',
+      cancelText: 'Cancel',
+      buttonClicked: function(index) {
+        $scope.addImage(index);
+      }
+    });
+  }
+
+  $scope.addImage = function(type) {
+    $scope.hideSheet();
+    ImageService.handleMediaDialog(type).then(function() {
+      $scope.$apply();
+    });
+  }
+
+ $scope.addimageusingpicker =function(){
+  var options = {
+   maximumImagesCount: 1,
+   width: 800,
+   height: 800,
+   quality: 80
+  };
+
+  $cordovaImagePicker.getPictures(options)
+    .then(function (results) {
+      for (var i = 0; i < results.length; i++) {
+      console.log('Image URI: ' + results[i]);
+      var layer = new Konva.Layer();
+      var imageObj = new Image();
+      imageObj.onload = function() {
+        var image = new Konva.Image({
+          image: imageObj,
+          width: $scope.canvasWidth,
+          height: $scope.canvasHeight
+        });
+        // add the shape to the layer
+        layer.add(image);
+        // add the layer to the stage
+        $scope.stage.add(layer);
+      };
+        imageObj.src = results[i];
+      }
+    }, function(error) {
+      // error getting photos
+    });
   }
 
 })

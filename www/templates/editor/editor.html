@@ -1,26 +1,26 @@
-<ion-view view-title="Editor" >
-  <ion-content scroll=false>
+<ion-view view-title="Editor" hide-nav-bar=true >
+  <ion-content>
     <div class="editor-navbar">
       <a class="button icon-left ion-chevron-left button-clear button-dark" ui-sref="app.member.explore">Back</a>
       <a class="save button icon-right ion-chevron-right button-clear button-dark" ng-click="saveImage()">Save Image</a>
     </div>
 
-    <div id="canvas" ng-style="canvasStyle"></div>
+    <div id="canvas" ng-style="canvasStyle" class="hide-on-keyboard-open"></div>
 
     <ion-tabs class="tabs-stable tabs-icon-only" scroll='false'>
 
-      <ion-tab title="Explore" icon-on="ion-compose" icon-off="ion-compose"  ui-sref="app.editor.text">
-        <ion-nav-view name="text"></ion-nav-view>
+      <ion-tab title="Explore" icon-on="ion-compose" icon-off="ion-compose"  on-select="resizeView()" ui-sref="editor.text" >
+        <ion-nav-view class="dynamic-editor-height" name="text" ></ion-nav-view>
       </ion-tab>
 
-      <ion-tab title="Home" icon-on="ion-paintbucket" icon-off="ion-paintbucket"  ui-sref="app.editor.color">
-        <ion-nav-view name="color"></ion-nav-view>
+      <ion-tab title="Home" icon-on="ion-paintbucket" icon-off="ion-paintbucket"  on-select="resizeView()" ui-sref="editor.color">
+        <ion-nav-view class="dynamic-editor-height" name="color"></ion-nav-view>
       </ion-tab>
-      <ion-tab title="Editor" icon-on="ion-cube" icon-off="ion-cube"  ui-sref="app.editor.shapes">
-        <ion-nav-view name="shapes"></ion-nav-view>
+      <ion-tab title="Editor" icon-on="ion-cube" icon-off="ion-cube"  on-select="resizeView()" ui-sref="editor.shapes">
+        <ion-nav-view class="dynamic-editor-height" name="shapes"></ion-nav-view>
       </ion-tab>
-      <ion-tab title="Subs" icon-on="ion-image" icon-off="ion-image"  ui-sref="app.editor.photos">
-        <ion-nav-view name="photos"></ion-nav-view>
+      <ion-tab title="Subs" icon-on="ion-image" icon-off="ion-image"  on-select="resizeView()" ui-sref="editor.photos">
+        <ion-nav-view class="dynamic-editor-height" name="photos"></ion-nav-view>
       </ion-tab>
     </ion-tabs>
   </ion-content>
