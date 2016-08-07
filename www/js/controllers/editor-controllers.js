@@ -10,6 +10,7 @@ angular.module('quo')
   $scope.fonts=["Merriweather", "Inconsolata", "Abel", "Quicksand", "Playfair Display", "Roboto Condensed"];
   $scope.colorsDefault=['black','white','#607d8b','#555555','#ffc93b'];
   $scope.colorsBgDefault=['#e74c3c','#e67e22','#f1c40f','#1abc9c','#34495e','#ecf0f1'];
+  $scope.colorfilter=['white','#d1efe5','#f1e1d4','#f3d7dc','#c2e8c6','#a9d2cd','black'];
   $scope.textParams   = {
     fontSelected: 'Merriweather',
     colorSelected: 'black',
@@ -67,21 +68,18 @@ angular.module('quo')
 
   $scope.saveImage = function(){
     var dataURL = $scope.stage.toDataURL();
-     cordova.base64ToGallery(
-        dataURL,
-
+    cordova.base64ToGallery(
+      dataURL,
         {
-            prefix: 'img_',
-            mediaScanner: true
+          prefix: 'img_',
+          mediaScanner: true
         },
-
-        function(path) {
-            console.log(path);
-        },
-
-        function(err) {
-            console.error(err);
-        }
+      function(path) {
+        console.log(path);
+      },
+      function(err) {
+        console.error(err);
+      }
     );
   }
 
@@ -134,12 +132,10 @@ angular.module('quo')
       textGroup.find('.bottomLeft').hide();
       layer.draw();
     })
-
     textGroup.on('dbltap', function() {
       this.destroy();
       layer.draw();
     })
-
     textGroup.on('dragstart', function() {
       this.moveToTop();
       layer.draw();
@@ -150,38 +146,34 @@ angular.module('quo')
 
   $scope.updateTextSize=function(activeAnchor) {
     var group = activeAnchor.getParent();
-
     var topLeft = group.get('.topLeft')[0];
     var topRight = group.get('.topRight')[0];
     var bottomRight = group.get('.bottomRight')[0];
     var bottomLeft = group.get('.bottomLeft')[0];
     var text = group.get('Text')[0];
-
     var anchorX = activeAnchor.getX();
     var anchorY = activeAnchor.getY();
 
     // update anchor positions
     switch (activeAnchor.getName()) {
       case 'topLeft':
-          topRight.setY(anchorY);
-          bottomLeft.setX(anchorX);
-          break;
+        topRight.setY(anchorY);
+        bottomLeft.setX(anchorX);
+        break;
       case 'topRight':
-          topLeft.setY(anchorY);
-          bottomRight.setX(anchorX);
-          break;
+        topLeft.setY(anchorY);
+        bottomRight.setX(anchorX);
+        break;
       case 'bottomRight':
-          bottomLeft.setY(anchorY);
-          topRight.setX(anchorX);
-          break;
+        bottomLeft.setY(anchorY);
+        topRight.setX(anchorX);
+        break;
       case 'bottomLeft':
-          bottomRight.setY(anchorY);
-          topLeft.setX(anchorX);
-          break;
+        bottomRight.setY(anchorY);
+        topLeft.setX(anchorX);
+        break;
     }
-
     text.position(topLeft.position());
-
     var width = topRight.getX() - topLeft.getX();
     var height = bottomLeft.getY() - topLeft.getY();
     if(width && height) {
@@ -280,9 +272,9 @@ angular.module('quo')
     });
 
     var circleGroup=new Konva.Group({
-        x:10,
-        y:200,
-        draggable:true
+      x:10,
+      y:200,
+      draggable:true
     });
     $scope.stage.add(layer);
     layer.add(circleGroup);
@@ -378,42 +370,42 @@ angular.module('quo')
 */
   $scope.generateTriangle=function(){
     var tri = new Konva.RegularPolygon({
-        sides: 3,
-        radius: 70,
-        fill: $scope.colorParams.fillColor,
-        stroke: $scope.colorParams.borderColor,
-        strokeWidth: 3
-      });
+      sides: 3,
+      radius: 70,
+      fill: $scope.colorParams.fillColor,
+      stroke: $scope.colorParams.borderColor,
+      strokeWidth: 3
+    });
 
-      var triGroup=new Konva.Group({
-          x:40,
-          y:200,
-          draggable:true
-      });
-      var layer = new Konva.Layer();
-      $scope.stage.add(layer);
-      layer.add(triGroup);
-      triGroup.add(tri);
-      $scope.addTriAnchor(triGroup, 0, 0, 'origin');
-      $scope.addTriAnchor(triGroup, 0, 35, 'control');
-      triGroup.on('touchstart', function() {
-        triGroup.find('.origin').show();
-        triGroup.find('.control').show();
-        layer.draw();
-      })
-      triGroup.on('tap', function() {
-        triGroup.find('.origin').hide();
-        triGroup.find('.control').hide();
-        layer.draw();
-      })
-      triGroup.on('dbltap', function() {
-        this.destroy();
-        layer.draw();
-      })
-      triGroup.on('dragstart', function() {
-        this.moveToTop();
-        layer.draw();
-      })
+    var triGroup=new Konva.Group({
+      x:40,
+      y:200,
+      draggable:true
+    });
+    var layer = new Konva.Layer();
+    $scope.stage.add(layer);
+    layer.add(triGroup);
+    triGroup.add(tri);
+    $scope.addTriAnchor(triGroup, 0, 0, 'origin');
+    $scope.addTriAnchor(triGroup, 0, 35, 'control');
+    triGroup.on('touchstart', function() {
+      triGroup.find('.origin').show();
+      triGroup.find('.control').show();
+      layer.draw();
+    })
+    triGroup.on('tap', function() {
+      triGroup.find('.origin').hide();
+      triGroup.find('.control').hide();
+      layer.draw();
+    })
+    triGroup.on('dbltap', function() {
+      this.destroy();
+      layer.draw();
+    })
+    triGroup.on('dragstart', function() {
+      this.moveToTop();
+      layer.draw();
+    })
     layer.draw();
   }
 
@@ -433,29 +425,29 @@ angular.module('quo')
     });
 
     anchor.on('dragmove', function() {
-        $scope.updatetri(this);
-        layer.draw();
+      $scope.updatetri(this);
+      layer.draw();
     });
     anchor.on('mousedown touchstart', function() {
-        group.setDraggable(false);
-        this.moveToTop();
+      group.setDraggable(false);
+      this.moveToTop();
     });
     anchor.on('dragend', function() {
-        group.setDraggable(true);
-        layer.draw();
+      group.setDraggable(true);
+      layer.draw();
     });
     // add hover styling
     anchor.on('mouseover', function() {
-        var layer = this.getLayer();
-        document.body.style.cursor = 'pointer';
-        this.setStrokeWidth(4);
-        layer.draw();
+      var layer = this.getLayer();
+      document.body.style.cursor = 'pointer';
+      this.setStrokeWidth(4);
+      layer.draw();
     });
     anchor.on('mouseout', function() {
-        var layer = this.getLayer();
-        document.body.style.cursor = 'default';
-        this.setStrokeWidth(2);
-        layer.draw();
+      var layer = this.getLayer();
+      document.body.style.cursor = 'default';
+      this.setStrokeWidth(2);
+      layer.draw();
     });
     group.add(anchor);
     var origin = group.get('.origin')[0];
@@ -615,30 +607,6 @@ angular.module('quo')
     }
   }
 
-
-
-
-  $scope.addMedia = function() {
-    $scope.hideSheet = $ionicActionSheet.show({
-      buttons: [
-        { text: 'Take photo' },
-        { text: 'Photo from library' }
-      ],
-      titleText: 'Add images',
-      cancelText: 'Cancel',
-      buttonClicked: function(index) {
-        $scope.addImage(index);
-      }
-    });
-  }
-
-  $scope.addImage = function(type) {
-    $scope.hideSheet();
-    ImageService.handleMediaDialog(type).then(function() {
-      $scope.$apply();
-    });
-  }
-
  $scope.addimageusingpicker =function(){
   var options = {
    maximumImagesCount: 1,
@@ -650,26 +618,54 @@ angular.module('quo')
   $cordovaImagePicker.getPictures(options)
     .then(function (results) {
       for (var i = 0; i < results.length; i++) {
-      console.log('Image URI: ' + results[i]);
-      var layer = new Konva.Layer();
-      var imageObj = new Image();
-      imageObj.onload = function() {
-        var image = new Konva.Image({
-          image: imageObj,
-          width: $scope.canvasWidth,
-          height: $scope.canvasHeight
-        });
-        // add the shape to the layer
-        layer.add(image);
-        // add the layer to the stage
-        $scope.stage.add(layer);
-      };
+        console.log('Image URI: ' + results[i]);
+        var layer = new Konva.Layer();
+        var imageObj = new Image();
+        imageObj.onload = function() {
+          var image = new Konva.Image({
+            image: imageObj,
+            width: $scope.canvasWidth,
+            height: $scope.canvasHeight
+          });
+          // add the shape to the layer
+          layer.add(image);
+          // add the layer to the stage
+          $scope.stage.add(layer);
+        };
         imageObj.src = results[i];
+        $('.selectimage').html('Change Image');
+        $('.filter').removeClass('hide');
+        $('.remove').removeClass('hide');
       }
     }, function(error) {
-      // error getting photos
+      console.log('there is a error');
     });
   }
 
+  $scope.filterColorChosen=function(index){
+    $('.normalborder').removeClass('').addClass('ion-record normal');
+    $('#'+'fillColor'+index).removeClass('ion-record').addClass('ion-checkmark-circled');
+    $scope.imagefilter(index);
+  }
+
+  $scope.imagefilter = function(index){
+    $scope.stage.find('.filter').destroy();
+    $scope.stage.draw();
+    var layer = new Konva.Layer();
+    var filter = new Konva.Rect({
+      width: $scope.canvasWidth,
+      height: $scope.canvasHeight,
+      fill: $scope.colorfilter[index],
+      opacity: 0.2,
+      name: 'filter'
+    });
+    layer.add(filter);
+    $scope.stage.add(layer);
+  }
+
+  $scope.removeImage =function(){
+    $scope.stage.find('Image').destroy();
+    $scope.stage.draw();
+  }
 })
 

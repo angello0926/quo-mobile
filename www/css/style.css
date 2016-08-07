@@ -136,3 +136,30 @@ label{
   margin-top: 10px;
   width:80%;
 }
+
+.selectimage{
+  font-family: "Helvetica Neue";
+  font-size: 30px;
+  text-align: center;
+  border: 1px dashed #A5D3D9 ;
+  height:150px;
+  margin:10px;
+  line-height: 45px;
+  color: #A5D3D9;
+
+}
+
+.filtercolor{
+  font-size:  30px;
+}
+
+.filtercolor:first-child{
+  font-size: 30px;
+  text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
+}
+
+.remove{
+  background-color: #ef4c4d;
+  color: white;
+
+}

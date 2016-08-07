@@ -1,10 +1,20 @@
 <ion-view view-title="Upload Photos" hide-nav-bar="true">
   <ion-content>
-   <button class="button button-full button-energized" ng-click="addimageusingpicker()">add photo</button>
-   <br>
-     <ion-scroll direction="x" style="height:200px; min-height: 200px; overflow: scroll; white-space: nowrap;">
-     <div id="photo"></div>
-    </ion-scroll>
+   <div class="selectimage" ng-click="addimageusingpicker()">Click here to import image as background</div>
+
+  <div class="row filter hide">
+      <div class="col filtercolor " ng-class="class" ng-repeat="color in colorfilter" style="color: {{color}};"  ng-click="filterColorChosen($index)"><i id="{{'filtercolor'+$index}}" class="normalbg ion-record row"></i>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-75">
+      <button class="button button-block remove hide" ng-click="removeImage()">remove image</button>
+    </div>
+    <div class="col"></div>
+  </div>
+
   </ion-content>
 </ion-view>
 
