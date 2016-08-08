@@ -50,6 +50,7 @@ angular.module('quo')
 
   $scope.getInfo = function() {
     $http.get(API_ENDPOINT.url + '/memberinfo').then(function(result) {
+      console.log(result);
       $scope.memberinfo = result.data.msg;
     });
   };

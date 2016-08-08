@@ -121,6 +121,15 @@ app.config(function($stateProvider, $urlRouterProvider){
         }
       }
     })
+    .state('createPost', {
+      url: '/createpost',
+      params: {
+        url: null,
+        img: null
+      },
+      templateUrl: 'templates/createpost.html',
+      controller: 'postController'
+   })
 
 
   $urlRouterProvider.otherwise('/app/landing');

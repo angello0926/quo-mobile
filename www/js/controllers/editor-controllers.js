@@ -1,11 +1,6 @@
 angular.module('quo')
 
-.controller('editorController', function($scope,$state,$ionicActionSheet, $cordovaDevice, $cordovaFile, $ionicPlatform, $cordovaEmailComposer, $ionicActionSheet, ImageService, FileService, $cordovaImagePicker) {
-
-  $ionicPlatform.ready(function() {
-    $scope.images = FileService.images();
-
-  });
+.controller('editorController', function($scope,$state,$http,$cordovaImagePicker,API_ENDPOINT) {
 
   $scope.fonts=["Merriweather", "Inconsolata", "Abel", "Quicksand", "Playfair Display", "Roboto Condensed"];
   $scope.colorsDefault=['black','white','#607d8b','#555555','#ffc93b'];
@@ -68,19 +63,33 @@ angular.module('quo')
 
   $scope.saveImage = function(){
     var dataURL = $scope.stage.toDataURL();
-    cordova.base64ToGallery(
-      dataURL,
-        {
-          prefix: 'img_',
-          mediaScanner: true
-        },
-      function(path) {
-        console.log(path);
-      },
-      function(err) {
-        console.error(err);
-      }
-    );
+    // cordova.base64ToGallery(
+    //   dataURL,
+    //     {
+    //       prefix: 'img_',
+    //       mediaScanner: true
+    //     },
+    //   function(path) {
+    //     console.log(path);
+    //   },
+    //   function(err) {
+    //     console.error(err);
+    //   }
+    // );
+
+    var data= {imageBinary: dataURL};
+    $http({
+      url: API_ENDPOINT.url+'/imageupload',
+      method: 'POST',
+      data:  data,
+
+    }).then(function(resp){
+      console.log(resp);
+      $state.go('createPost',{url: resp.data.imgurl, img: resp.data.img_name});
+    })
+
+
+
   }
 
 /**
@@ -643,8 +652,8 @@ angular.module('quo')
   }
 
   $scope.filterColorChosen=function(index){
-    $('.normalborder').removeClass('').addClass('ion-record normal');
-    $('#'+'fillColor'+index).removeClass('ion-record').addClass('ion-checkmark-circled');
+    $('.normalfilter').removeClass('').addClass('ion-record normal');
+    $('#'+'filtercolor'+index).removeClass('ion-record').addClass('ion-checkmark-circled');
     $scope.imagefilter(index);
   }
 

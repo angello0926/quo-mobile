@@ -2,8 +2,8 @@
   <ion-content>
    <div class="selectimage" ng-click="addimageusingpicker()">Click here to import image as background</div>
 
-  <div class="row filter hide">
-      <div class="col filtercolor " ng-class="class" ng-repeat="color in colorfilter" style="color: {{color}};"  ng-click="filterColorChosen($index)"><i id="{{'filtercolor'+$index}}" class="normalbg ion-record row"></i>
+  <div class="row filter">
+      <div class="col filtercolor " ng-repeat="color in colorfilter" style="color: {{color}};"  ng-click="filterColorChosen($index)"><i id="{{'filtercolor'+$index}}" class="normalfilter ion-record "></i>
       </div>
   </div>
 
