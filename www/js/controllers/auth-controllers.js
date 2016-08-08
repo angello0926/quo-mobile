@@ -27,7 +27,7 @@ angular.module('quo')
 
   $scope.signup = function() {
     AuthService.register($scope.user).then(function(msg) {
-      $state.go('app.member.explore');
+      $state.go('app.member.profile');
       console.log(AuthService.isAuthenticated());
       var alertPopup = $ionicPopup.alert({
         title: 'Register success!',

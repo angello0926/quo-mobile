@@ -72,8 +72,8 @@ app.config(function($stateProvider, $urlRouterProvider){
     })
     .state('app.member.home', {
       url: '/home',
-      templateUrl: 'templates/member/home.html'
-
+      templateUrl: 'templates/member/home.html',
+      controller: 'homeController'
     })
     .state('app.member.subs', {
       url: '/subs',
