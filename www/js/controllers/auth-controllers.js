@@ -48,12 +48,7 @@ angular.module('quo')
     console.log(AuthService.isAuthenticated());
   };
 
-  $scope.getInfo = function() {
-    $http.get(API_ENDPOINT.url + '/memberinfo').then(function(result) {
-      console.log(result);
-      $scope.memberinfo = result.data.msg;
-    });
-  };
+
 
   $scope.logout = function() {
     AuthService.logout();

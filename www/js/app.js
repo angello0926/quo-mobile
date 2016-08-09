@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-var app = angular.module('quo', ['ionic','ngCordova']);
+var app = angular.module('quo', ['ionic','ngCordova','angularMoment']);
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -81,11 +81,12 @@ app.config(function($stateProvider, $urlRouterProvider){
     })
     .state('app.member.profile', {
       url: '/profile',
-      templateUrl: 'templates/member/profile.html'
+      templateUrl: 'templates/member/profile.html',
+      controller: 'profileController'
     })
     .state('editor', {
       url: '/editor',
-      abstract:true,
+      abstract: true,
       templateUrl: 'templates/editor/editor.html',
       controller: "editorController"
     })
@@ -132,6 +133,7 @@ app.config(function($stateProvider, $urlRouterProvider){
    })
 
 
+
   $urlRouterProvider.otherwise('/app/landing');
 });
 
@@ -153,3 +155,8 @@ app.config(['$ionicConfigProvider', function($ionicConfigProvider) {
     $ionicConfigProvider.tabs.position('bottom'); // other values: top
 
 }]);
+
+
+app.run(function(amMoment) {
+    amMoment.changeLocale('de');
+});

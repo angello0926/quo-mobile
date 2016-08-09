@@ -118,9 +118,6 @@ textarea{
   font-size: 18px;
 }
 
-img{
-  width:100%;
-}
 
 label{
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -206,4 +203,27 @@ label{
 
 .pull{
   float: right;
+  margin-left: 10px;
+}
+
+tab{
+  padding-bottom: 3px;
+}
+
+.closeModal{
+  font-size: 25px;
+}
+
+.profilepic{
+
+  border-radius: 100px;
+
+}
+
+.profilebar{
+  height:150px;
+}
+
+.quotepic{
+  width:100%;
 }

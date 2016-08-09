@@ -1,6 +1,6 @@
 angular.module('quo')
 
-.controller('editorController', function($scope,$state,$http,$cordovaImagePicker,API_ENDPOINT) {
+.controller('editorController', function($scope,$state,$http,$ionicLoading,$cordovaImagePicker,API_ENDPOINT) {
 
   $scope.fonts=["Merriweather", "Inconsolata", "Abel", "Quicksand", "Playfair Display", "Roboto Condensed"];
   $scope.colorsDefault=['black','white','#607d8b','#555555','#ffc93b'];
@@ -21,7 +21,21 @@ angular.module('quo')
   $scope.canvasHeight = $scope.canvasWidth * 0.75;
   $scope.editorHeight = windowHeight - navbarHeight - $scope.canvasHeight;
 
+
   $('.dynamic-editor-height').css("height", $scope.editorHeight);
+  $scope.showLoading= function() {
+    $ionicLoading.show({
+      template: 'Loading...'
+    }).then(function(){
+       console.log("The loading indicator is now displayed");
+    });
+  };
+
+  $scope.hideLoading = function(){
+    $ionicLoading.hide().then(function(){
+       console.log("The loading indicator is now hidden");
+    });
+  };
   $scope.initiateStage=function(){
     $scope.canvasStyle = {
       width: $scope.canvasWidth,
@@ -49,10 +63,9 @@ angular.module('quo')
 
     $scope.layer.add(bg);
     $scope.stage.add($scope.layer);
-
-
   }
-    $scope.initiateStage();
+
+  $scope.initiateStage();
 
   $scope.resizeView=function(){
     angular.element(document).ready(function () {
@@ -78,18 +91,17 @@ angular.module('quo')
     // );
 
     var data= {imageBinary: dataURL};
+    $scope.showLoading();
     $http({
       url: API_ENDPOINT.url+'/imageupload',
       method: 'POST',
       data:  data,
-
     }).then(function(resp){
       console.log(resp);
       $state.go('createPost',{url: resp.data.imgurl, img: resp.data.img_name});
+      $scope.hideLoading();
+      $scope.initiateStage();
     })
-
-
-
   }
 
 /**
