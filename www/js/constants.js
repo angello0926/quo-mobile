@@ -9,5 +9,5 @@ angular.module('quo')
   //for android-emualtor
   // url: 'http://10.0.2.2:8080/api'
   //url: 'http://localhost:8080/api'
-  // url: 'https://hidden-wildwood-72146.herokuapp.com/api'
+  //url: 'https://hidden-wildwood-72146.herokuapp.com/api'
 });

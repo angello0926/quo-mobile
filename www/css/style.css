@@ -19,7 +19,7 @@ h1{
   font-weight: bolder;
   letter-spacing: 6px;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
 
 }
 
@@ -40,7 +40,7 @@ h1{
 }
 
 .loginPage{
-  margin-top: 25%;
+  margin-top: 10%;
 }
 
 .padding{
@@ -216,8 +216,8 @@ tab{
 }
 
 .profilepic{
-
-  border-radius: 100px;
+  width:100%;
+  border-radius: 150px;
 
 }
 
@@ -232,3 +232,8 @@ tab{
 .photo{
   width:100%;
 }
+
+.avatar{
+  border: 1px solid whitesmoke;
+}
+

@@ -1,36 +1,45 @@
 <ion-view view-title="Profile" hide-nav-bar="true">
    <ion-content>
-
-      <div class="row">
-        <div class="col"></div>
-        <div class="col-30 padding">
-            <img ng-click="openModaluploadpic()" class="profilepic" ng-src="https://s3.amazonaws.com/quo-mobile/{{memberinfo.profile.picture}}">
-            <h2>{{post._creator.name}}</h2>
-        </div>
-        <div class="col"></div>
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-50 padding ">
+          <img ng-click="openModaluploadpic()" class="profilepic" ng-src="https://s3.amazonaws.com/quo-mobile/{{memberinfo.profile.picture}}">
+          <h2>{{post._creator.name}}</h2>
       </div>
+      <div class="col"></div>
+    </div>
 
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Name</span>
-          <input type="text">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">About</span>
-          <input type="text">
-        </label>
-       <li class="item item-toggle">
-           Private Account
-           <label class="toggle toggle-dark">
-             <input type="checkbox">
-             <div class="track">
-               <div class="handle"></div>
-             </div>
-           </label>
-        </li>
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Name</span>
+        <input ng-model="editInfo.name" placeholder={{memberinfo.profile.name}} type="text">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">About</span>
+        <input ng-model="editInfo.about" placeholder={{memberinfo.profile.about}} type="text">
+      </label>
+     <li class="item item-toggle">
+         Private Account
+         <label class="toggle toggle-dark">
+           <input ng-model="editInfo.private" ng-init="memberinfo.private"  type="checkbox">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+      </li>
+    </div>
 
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-50">
+        <button class="button button-block authbuttons saveInfo" ng-click="saveProfile()">Save</button>
       </div>
-
+      <div class="col"></div>
+    </div>
 
 
     <button ng-click="openModalSetting()">Setting</button>

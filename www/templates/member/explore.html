@@ -10,10 +10,18 @@
       </label>
       <div class="list card" ng-repeat="post in content.posts">
         <div class="item item-avatar">
-          <img ng-src="https://s3.amazonaws.com/quo-mobile/{{post._creator.profile.picture}}">
-            <h2>{{post._creator.profile.name}} <span><button class="button follow pull">Follow</button></span></h2>
-            <p> {{post._creator.profile.about}}</p>
-            <p> Followers: {{post._creator.followers.length}} </p>
+        <img ng-src="https://s3.amazonaws.com/quo-mobile/{{post._creator.profile.picture}}">
+          <div class="row">
+            <div class="col">
+              <h3>{{post._creator.profile.name}}</h3>
+              <h4> {{post._creator.profile.about}}</h4>
+              <h4> Followers: {{post._creator.followers.length}} </h4>
+            </div>
+            <div class="col-10">
+              <button id="{{'button'+$index}}"
+              ng-click="follow($index)" class="button follow pull">{{followButtons[$index]}}</button>
+            </div>
+          </div>
         </div>
         <div class="item item-image">
           <img ng-click="openModal($index)" ng-src="https://s3.amazonaws.com/quo-mobile/{{post.quote_pic}}">
