@@ -47,8 +47,8 @@ angular.module('quo')
     AuthService.logout();
     console.log(AuthService.isAuthenticated());
   };
-
-
+ $scope.destroySession();
+ $scope.logout();
 
   $scope.logout = function() {
     AuthService.logout();
@@ -56,6 +56,8 @@ angular.module('quo')
     console.log(AuthService.isAuthenticated());
   };
 })
+
+
 
 .controller('appController', function($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS) {
   $scope.$on(AUTH_EVENTS.notAuthenticated, function(event) {

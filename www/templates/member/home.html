@@ -4,15 +4,21 @@
       pulling-text="Pull to refresh..."
       on-refresh="doRefresh()">
     </ion-refresher>
-    <div class="homeProfile">
-        <div class="item item-avatar">
-          <img ng-src="https://s3.amazonaws.com/quo-mobile/{{infoParams.pic}}">
-          <h2>{{infoParams.name}}</h2>
-          <p> Posts: {{infoParams.postsNum}}</p>
-          <p> Followers: {{infoParams.followers}} </p>
-          <p> Subscriptions: {{infoParams.subs}}</p>
-        </div>
-     </div>
+    <div class="homeProfile padding">
+       <div class="row">
+          <div class="col-25">
+            <img class="itemavatar" ng-src="https://s3.amazonaws.com/quo-mobile/{{infoParams.pic}}">
+          </div>
+          <div class="col">
+            <h4 class="homeName">{{infoParams.name}}</h4>
+            <div>
+              <span><i class="ion-document"></i> {{infoParams.postsNum}}</span>
+              <span><i class="ion-android-people"></i> {{infoParams.followers}}</span>
+              <span><i class="ion-android-favorite"></i> {{infoParams.subs}}</span>
+            </div>
+          </div>
+       </div>
+    </div>
 
      <div class="list card" ng-repeat= "post in content.posts">
         <div class="item item-body">
@@ -21,8 +27,8 @@
             {{post.captions}}
           </p>
           <p>
-            <button class=" tag">{{post.author}}</button>
-            <button class=" tag">{{post.title}}</button>
+            <button class="tag">{{post.author}}</button>
+            <button class="tag">{{post.title}}</button>
          </p>
           <p>
             <span><i class="ion-bookmark bigger"> {{post.bookmarked.length}}</i></span>

@@ -4,15 +4,11 @@
       <a class="button icon-left ion-chevron-left button-clear button-dark" ui-sref="app.member.explore">Back</a>
       <a class="save button icon-right ion-chevron-right button-clear button-dark" ng-click="saveImage()">Save Image</a>
     </div>
-
     <div id="canvas" ng-style="canvasStyle" class="hide-on-keyboard-open"></div>
-
     <ion-tabs class="tabs-stable tabs-icon-only" scroll='false'>
-
       <ion-tab title="Explore" icon-on="ion-compose" icon-off="ion-compose"  on-select="resizeView()" ui-sref="editor.text" >
         <ion-nav-view class="dynamic-editor-height" name="text" ></ion-nav-view>
       </ion-tab>
-
       <ion-tab title="Home" icon-on="ion-paintbucket" icon-off="ion-paintbucket"  on-select="resizeView()" ui-sref="editor.color">
         <ion-nav-view class="dynamic-editor-height" name="color"></ion-nav-view>
       </ion-tab>

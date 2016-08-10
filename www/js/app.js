@@ -152,8 +152,9 @@ app.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
 });
 
 app.config(['$ionicConfigProvider', function($ionicConfigProvider) {
-
-    $ionicConfigProvider.tabs.position('bottom'); // other values: top
+  $ionicConfigProvider.views.maxCache(0);
+  $ionicConfigProvider.views.transition('none');
+  $ionicConfigProvider.tabs.position('bottom'); // other values: top
 
 }]);
 
@@ -161,3 +162,4 @@ app.config(['$ionicConfigProvider', function($ionicConfigProvider) {
 app.run(function(amMoment) {
     amMoment.changeLocale('de');
 });
+

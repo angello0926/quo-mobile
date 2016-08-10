@@ -15,7 +15,7 @@
 }
 
 h1{
-  font-family: "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: bolder;
   letter-spacing: 6px;
   text-align: center;
@@ -50,9 +50,10 @@ h1{
 .authbuttons{
   background-color: #A5D3D9;
   color: black;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: bold;
   font-size: 15px;
+  padding: 0px;
 }
 
 .tabs-striped.tabs-stable .tab-item.tab-item-active, .tabs-striped.tabs-stable .tab-item.active, .tabs-striped.tabs-stable .tab-item.activated{
@@ -186,14 +187,14 @@ label{
 }
 
 .tag{
+  font-family: "Open Sans", sans-serif;
   border: none;
   box-shadow: none;
-  background-color:  #A5D3D9;
-  color:black;
-  font-weight: bold;
+  background-color:#97908D;
+  color:white;
   padding: 5px 10px 5px 10px;
   margin-right: 10px;
-  font-size:14px;
+  font-size:8px;
   border-radius: 5px;
 }
 
@@ -240,4 +241,93 @@ tab{
 .captions{
   border-left: 2px solid  #A5D3D9;
   padding: 10px;
+}
+
+.smaller{
+  font-size: 12px;
+}
+
+p{
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
+}
+
+.unfollow{
+  font-size: 6px;
+  background-color: #D35362;
+  border: none;
+  border-radius: 5px;
+  color:white;
+  padding: 3px 5px 3px 5px;
+  width:65px;
+
+}
+
+.follow{
+  font-size: 6px;
+  background-color: #A5D3D9;
+  border: none;
+  border-radius: 5px;
+  color:white;
+  padding: 3px 5px 3px 5px;
+  width:65px;
+
+}
+
+
+.itemavatar{
+  margin-top: 15px;
+  width: 80%;
+  border-radius: 100px;
+}
+
+.item p{
+  font-size: 11px;
+}
+
+.item-divider{
+  background-color: white;
+}
+
+.tab-item-active{
+  color:#A5D3D9;
+}
+
+.margin{
+  margin-left: 10px;
+  margin-top:10px;
+}
+
+.footerModal{
+  margin-top: 0px;
+  padding-top:0px;
+}
+
+.modalbackground{
+  background-color:white;
+}
+
+.time{
+  font-family: "Roboto",sans-serif;
+  padding-top: 5px;
+  font-size: 8px;
+
+}
+
+ p{
+  font-size: 11px;
+  margin: 0px 0px 0px 0px;
+}
+
+.homeProfile span{
+  margin-right: 10px;
+}
+
+.homeProfile{
+  padding-bottom: 3px;
+  background-color: white;
+}
+
+h4{
+  font-family: "Roboto",sans-serif;
 }
