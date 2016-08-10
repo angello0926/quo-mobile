@@ -52,6 +52,7 @@ h1{
   color: black;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
+  font-size: 15px;
 }
 
 .tabs-striped.tabs-stable .tab-item.tab-item-active, .tabs-striped.tabs-stable .tab-item.active, .tabs-striped.tabs-stable .tab-item.activated{
@@ -225,5 +226,9 @@ tab{
 }
 
 .quotepic{
+  width:100%;
+}
+
+.photo{
   width:100%;
 }
