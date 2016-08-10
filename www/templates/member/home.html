@@ -32,7 +32,7 @@
          </p>
           <p>
             <span><i class="ion-bookmark bigger"> {{post.bookmarked.length}}</i></span>
-            <span ng-click='deletePost($index)'><i class="ion-trash-a bigger pull"></i></span>
+            <span ng-click='showConfirm($index)'><i class="ion-trash-a bigger pull"></i></span>
             <span class="pull" am-time-ago="post.createdAt"></span>
           </p>
 

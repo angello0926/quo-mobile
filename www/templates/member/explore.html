@@ -15,20 +15,23 @@
       </div>
       <div class="list card" ng-repeat="post in content.posts">
         <div class="item">
-        <div class="row">
-        <div class="col-25">
-          <img class="itemavatar" ng-src="https://s3.amazonaws.com/quo-mobile/{{post._creator.profile.picture}}">
-        </div>
-        <div class="col">
-          <h2>{{post._creator.profile.name}}</h2>
-          <p> {{post._creator.profile.about}}</p>
-          <div>
-            <button class="follow"><i class="ion-android-person"></i>{{post._creator.followers.length}}</button>
-            <button id="{{'button'+$index}}"
-            ng-click="follow($index)" ng-class="{follow: followButtons[$index]=='Follow', unfollow: followButtons[$index]=='Unfollow'}">{{followButtons[$index]}}</button></div>
-
-        </div>
-        </div>
+          <div class="row">
+            <div class="col-25">
+              <img class="itemavatar" ng-src="https://s3.amazonaws.com/quo-mobile/{{post._creator.profile.picture}}">
+            </div>
+            <div class="col-75">
+              <h2>{{post._creator.profile.name}}</h2>
+              <p> {{post._creator.profile.about}}</p>
+              <div>
+                <button class="follow">
+                  <i class="ion-android-person"></i>{{post._creator.followers.length}}
+                </button>
+                <button id="{{'button'+$index}}"
+                  ng-click="follow($index)" ng-class="{follow: followButtons[$index]=='Follow', unfollow: followButtons[$index]=='Unfollow'}">{{followButtons[$index]}}
+                </button>
+              </div>
+             </div>
+          </div>
         </div>
         <div class="item item-image">
           <img ng-click="openModal($index)" ng-src="https://s3.amazonaws.com/quo-mobile/{{post.quote_pic}}">

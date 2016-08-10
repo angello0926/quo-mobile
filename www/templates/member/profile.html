@@ -4,7 +4,7 @@
       pulling-text="Pull to refresh..."
       on-refresh="doRefresh()">
     </ion-refresher>
-    <div class="row">
+    <div class="row padding">
       <div class="col"></div>
       <div class="col-50 padding ">
           <img ng-click="openModaluploadpic()" class="profilepic" ng-src="https://s3.amazonaws.com/quo-mobile/{{memberinfo.profile.picture}}">
@@ -37,6 +37,13 @@
       <div class="col"></div>
       <div class="col-50">
         <button class="button button-block authbuttons saveInfo" ng-click="saveProfile()">Save</button>
+      </div>
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-50">
+        <button class="button button-block authbuttons logout" ng-click="logout()">Logout</button>
       </div>
       <div class="col"></div>
     </div>
