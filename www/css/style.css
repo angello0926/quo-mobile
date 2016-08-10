@@ -237,3 +237,7 @@ tab{
   border: 1px solid whitesmoke;
 }
 
+.captions{
+  border-left: 2px solid  #A5D3D9;
+  padding: 10px;
+}

@@ -1,9 +1,29 @@
 <ion-view view-title="Subscription" hide-nav-bar="true">
 
-   <ion-content>
-   <h1>Subscription</h1>
-  </ion-content>
-
-
-
+    <ion-content class="background">
+      <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+      </ion-refresher>
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="search" placeholder="Search">
+      </label>
+      <div class="list card" ng-repeat="post in content.posts">
+        <div class="item item-avatar">
+        <img ng-src="https://s3.amazonaws.com/quo-mobile/{{post._creator.profile.picture}}">
+              <h3>{{post._creator.profile.name}}</h3>
+              <h4> {{post._creator.profile.about}}</h4>
+              <h4> Followers: {{post._creator.followers.length}} </h4>
+        </div>
+        <div class="item item-body">
+          <img class="full-image" ng-src="https://s3.amazonaws.com/quo-mobile/{{post.quote_pic}}">
+           <p class="captions">
+            {{post.captions}}
+           </p>
+           <button class="tag">{{post.author}}</button>
+           <button class="tag">{{post.title}}</button>
+        </div>
+      </div>
+     </ion-content>
 </ion-view>

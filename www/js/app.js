@@ -77,7 +77,8 @@ app.config(function($stateProvider, $urlRouterProvider){
     })
     .state('app.member.subs', {
       url: '/subs',
-      templateUrl: 'templates/member/subs.html'
+      templateUrl: 'templates/member/subs.html',
+      controller:'subsController'
     })
     .state('app.member.profile', {
       url: '/profile',
